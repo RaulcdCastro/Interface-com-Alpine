@@ -24,5 +24,16 @@
       </ul>
     </section>
 
+    <form>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" x-model="nome" placeholder="Digite seu nome" />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" x-model="email" placeholder="Digite seu email" />
+
+      <button type="button" @click="console.log({ nome, email })">Enviar</button>
+    </form>
+  </div>
+
 </body>
 </html>
