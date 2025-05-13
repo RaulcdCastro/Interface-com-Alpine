@@ -7,8 +7,43 @@
   <script src="js/formulario.js" defer></script>
   <script src="js/alpine.min.js" defer></script>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .modo-escuro {
+      background-color: #111;
+      color: #f5f5f5;
+    }
+
+    .modo-escuro input,
+    .modo-escuro textarea {
+      background-color: #222;
+      color: #f5f5f5;
+      border: 1px solid #555;
+    }
+
+    .modo-escuro .botao-escuro {
+      background-color: #444;
+      color: #fff;
+    }
+
+    .botao-escuro {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.4rem 0.8rem;
+      background-color: #ccc;
+      color: #000;
+      border-radius: 0.3rem;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body>
+
+<body x-data="tema()" x-init="init()" :class="{ 'modo-escuro': modoEscuro }">
+
+  <button @click="alternar()" class="botao-escuro">
+    <span x-text="modoEscuro ? '☀️ Claro' : '🌙 Escuro'"></span>
+  </button>
 
   <div class="container" x-data="formulario()">
     <header>
@@ -41,6 +76,21 @@
       </button>
     </form>
   </div>
+
+  <script>
+    function tema() {
+      return {
+        modoEscuro: false,
+        init() {
+          this.modoEscuro = JSON.parse(localStorage.getItem('modoEscuro')) || false;
+        },
+        alternar() {
+          this.modoEscuro = !this.modoEscuro;
+          localStorage.setItem('modoEscuro', this.modoEscuro);
+        }
+      }
+    }
+  </script>
 
 </body>
 </html>
