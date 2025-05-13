@@ -1,0 +1,12 @@
+{
+  "name": "interface-com-alpine-validacao-final",
+  "version": "1.0.0",
+  "description": "Este projeto consiste em uma interface simples feita utilizando o framework Alpine.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

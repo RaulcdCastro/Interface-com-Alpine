@@ -64,10 +64,21 @@ form button {
   background-color: #77c1d2;
   color: #2d3441;
   border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 4px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover:not(:disabled) {
+  background-color: #5aa9bc;
+}
+
+form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .alerta-sucesso {
@@ -86,6 +97,11 @@ form button {
   color: #721c24;
   border: 1px solid #f5c6cb;
   border-radius: 4px;
+}
+
+.input-erro {
+  border: 2px solid red !important;
+  background-color: #ffe5e5;
 }
 
 [x-cloak] {
