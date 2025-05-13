@@ -7,20 +7,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+function nomePareceFalso(email) {
+  const nome = email.split('@')[0].toLowerCase();
+
+  if (nome.length < 4) return true;
+  if (/(.)\1{4,}/.test(nome)) return true;
+
+  const padroes = ['asdf', 'qwer', 'zxcv', '123456', '1111', 'aaaa', 'abc', 'test', 'fake'];
+  return padroes.some(p => nome.includes(p));
+}
+
 app.post('/verificar-email', async (req, res) => {
   const { email } = req.body;
 
-  if (!email) {
-    return res.status(400).json({ error: 'Email não fornecido' });
-  }
-
   const apiKey = process.env.MAILBOXLAYER_KEY;
-  const url = `http://apilayer.net/api/check?access_key=${apiKey}&email=${email}&format=1`;
+  const url = `http://apilayer.net/api/check?access_key=${apiKey}&email=${email}&smtp=1&format=1`;
 
   try {
     const resposta = await fetch(url);
     const dados = await resposta.json();
-
     console.log("📬 Dados da API:", JSON.stringify(dados, null, 2));
 
     const validoAPI =
@@ -28,12 +33,11 @@ app.post('/verificar-email', async (req, res) => {
       dados.mx_found === true &&
       dados.smtp_check === true &&
       dados.disposable === false &&
-      (typeof dados.score === 'number' ? dados.score >= 0.6 : true); // ← aqui o ajuste chave
+      typeof dados.score === 'number' &&
+      dados.score >= 0.7 &&
+      !nomePareceFalso(email);
 
-    res.json({
-      email,
-      valid: validoAPI
-    });
+    res.json({ email, valid: validoAPI });
 
   } catch (erro) {
     console.error('❌ Erro ao verificar e-mail:', erro);
