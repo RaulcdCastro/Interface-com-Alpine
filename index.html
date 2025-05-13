@@ -95,7 +95,7 @@
     <!-- Página Home -->
     <div x-show="rotaAtual === 'home'" x-cloak>
       <section class="bloco-info">
-        <h2>Sobre o projeto</h2>
+
         <p>Exemplo simples de como usar Alpine.js para criar uma interface interativa com HTML e validação de e-mail real.</p>
       </section>
 
@@ -127,15 +127,14 @@
         <h1>Sobre</h1>
       </header>
       <section class="bloco-info">
-        <h2>Informações</h2>
-        <p>Este é um exemplo de navegação SPA usando Alpine.js. Tudo funciona sem recarregar a página.</p>
+        <p>Alpine é uma ferramenta robusta e mínima para compor o comportamento diretamente na sua marcação. Pense nisso como jQuery para a web moderna. Plop em uma tag de script e começar a ir. </p>
       </section>
     </div>
 
 <!-- Página Usuários -->
 <div x-show="rotaAtual === 'usuarios'" x-data="usuarios()" x-init="carregarUsuarios()" x-cloak>
   <header>
-    <h1>Usuários</h1>
+    <h1>Usuários cadastrados</h1>
   </header>
 
   <section class="bloco-info">
