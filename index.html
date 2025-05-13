@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpine.js</title>
+  <script src="js/formulario.js" defer></script>
+  <script src="js/alpine.min.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container" x-data="formulario()">
+    <header>
+      <h1>Alpine.js</h1>
+    </header>
+
+    <section class="bloco-info">
+      <h2>Sobre o projeto</h2>
+      <p>Exemplo simples de como usar Alpine.js para criar uma interface interativa com HTML e validação de e-mail real.</p>
+    </section>
+
+    <div x-show="sucesso" x-transition x-cloak class="alerta-sucesso">
+      ✅ Formulário enviado com sucesso!
+    </div>
+
+    <div x-show="erro" x-transition x-cloak class="alerta-erro">
+      ❌ Email inválido ou inexistente.
+    </div>
+
+    <form @submit.prevent>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" x-model="nome" placeholder="Digite seu nome" />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" x-model="email" :class="emailInvalido ? 'input-erro' : ''" placeholder="Digite seu email" />
+
+      <button type="button" @click="enviarFormulario" :disabled="carregando" class="botao-enviar">
+        <span x-show="!carregando">Enviar</span>
+        <span x-show="carregando">Verificando...</span>
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
